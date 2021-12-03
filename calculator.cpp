@@ -1,3 +1,5 @@
+//Sample C++ program to test the fuzzing script
+
 # include <iostream>
 using namespace std;
 
