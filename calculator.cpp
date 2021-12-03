@@ -1,14 +1,11 @@
 # include <iostream>
 using namespace std;
 
-# include <iostream>
-using namespace std;
-
 int main() {
     char operatorsign;
     float operand1, operand2, result;
 
-    cout << "Enter one operato here: +, -, *, /: ";
+    cout << "Enter one operation here: +, -, *, /: ";
     cin >> operatorsign;
 
     cout << "Enter two operands here: ";
@@ -22,5 +19,5 @@ int main() {
       result = operand1 - operand2;
       cout<< result;
     }
-    
+
 }
