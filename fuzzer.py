@@ -1,39 +1,32 @@
-import subprocess as sb
-from subprocess import Popen, PIPE
 import os
-import random
-from datetime import datetime
-import string
+from subprocess import CalledProcessError, Popen, PIPE
+import sys
+from random import randint
 
-# Generate a random string
 
-operationList = ['+','-','*','/']
+cmd = "program.exe"
+loopTimes = int(sys.argv[1])
 
-try:
-    while True:
-        x = ''.join(random.choice(operationList))
-        random.seed(datetime.now())
-        y = random.random()
-        random.seed(datetime.now())
-        z = random.random()
 
-        random_input = str(x) + " " + str(y) + " " + str(z)
-        #print(random_input)
+def main():
+   with open('fuzzer.txt', 'w') as fw:
 
-        data, temp = os.pipe()
+      for i in range(loopTimes):
+         print(f'\n\nRunning the executable {i}')
+         op = ['+', '-', '*', '/'][randint(0, 3)]
+         num1 = randint(-1000, 1000)
+         num2 = randint(-1000, 1000)
+         print(f'The operator is {op}')
+         print(f'The 1st operand is {num1}')
+         print(f'The 2nd operand is {num2}')
+      
+         input_data = os.linesep.join([op, str(num1), str(num2)])
+      
+         p = Popen(cmd, stdin=PIPE, bufsize=0)
+         p.communicate(input_data.encode('ascii'))
+         if p.returncode != 0:
+            fw.write(f'Operator : {op}, Operand1 : {num1}, Operand2 : {num2}, ReturnedCode : {p.returncode}')
 
-        # os.write(temp,bytes("+ 20 10\n", "utf-8"))
-        os.write(temp,bytes(random_input, "utf-8"))
-        os.close(temp)
 
-        for i in range(1000):
-            with open('output{}.txt'.format(i), 'w') as f:
-                s = sb.run("g++ calculator.cpp -o out2;./out2;./out2", stdin = data, stdout=f, shell = True)
-
-except KeyboardInterrupt:
-    print("Press Ctrl-C to terminate while statement")
-    pass
-
-        #s = sb.check_output("g++ calculator.cpp -o out2;./out2", stdin = data, shell = True)
-
-        #print(s.decode("utf-8"))
+if __name__ == "__main__":
+   main()
