@@ -1,3 +1,4 @@
+# Python fuzzer for calculator.cpp
 import os # module for interacting with the operating system's functionality
 from subprocess import CalledProcessError, Popen, PIPE # module to work with passive processes and pipe errors for their return codes
 import sys # module to directly interact with runtime environment 
