@@ -1,4 +1,4 @@
-//Sample C++ program to test the fuzzing script
+// Sample C++ program to test the fuzzing script
 
 #include <iostream>
 #include <stdexcept>
