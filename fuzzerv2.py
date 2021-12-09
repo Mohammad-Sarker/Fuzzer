@@ -1,3 +1,4 @@
+# Python fuzzer for Linux bc command line calculator
 import os
 from subprocess import CalledProcessError, Popen, PIPE
 import sys
